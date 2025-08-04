@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Adventures - Fun AI News for Kids!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* History Navigation */
+        .history-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .history-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .history-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .history-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .history-btn h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .history-btn p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* History Sections */
+        .history-section {
+            animation: slideInHistory 0.5s ease;
+        }
+
+        @keyframes slideInHistory {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .close-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section-header h3 {
+                text-align: center;
+                margin-bottom: 0;
+            }
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Floating particles animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .robot-icon {
+            font-size: 3rem;
+            margin-right: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main content */
+        main {
+            position: relative;
+            z-index: 10;
+            padding: 40px 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Content sections */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Interactive elements */
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-option {
+            background: linear-gradient(45deg, #ff9a56, #ffb347);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-option.correct {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        .quiz-option.incorrect {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        }
+
+        /* News section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-image {
+            height: 150px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .news-excerpt {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #4ecdc4;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #4ecdc4;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .expanded-content {
+            overflow: hidden;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 0;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            left: 50%;
+        }
+
+        .timeline-year {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin: 0 40px;
+            position: relative;
+            max-width: 400px;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            border: 10px solid transparent;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: white;
+        }
+
+        .timeline-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .timeline-content h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Heroes Grid */
+        .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-card h4 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Facts Grid */
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border: 2px solid rgba(255, 107, 107, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: rgba(255, 107, 107, 0.4);
+        }
+
+        .fact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .fact-card h4 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .fact-card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Timeline */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+            
+            .timeline-year {
+                left: 30px;
+                transform: translateX(-50%);
+            }
+            
+            .timeline-content {
+                margin: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -20px;
+                border-right-color: white;
+                border-left-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="robot-icon">🤖</span>
+                    AI Adventures
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="javascript:scrollToSection('home')">Home</a></li>
+                        <li><a href="javascript:scrollToSection('news')">AI News</a></li>
+                        <li><a href="javascript:scrollToSection('learn')">Learn</a></li>
+                        <li><a href="javascript:scrollToSection('history')">History</a></li>
+                        <li><a href="javascript:scrollToSection('games')">Games</a></li>
+                        <li><a href="javascript:scrollToSection('about')">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero" id="home">
+            <h1>Welcome to AI Adventures! 🚀</h1>
+            <p>Discover the amazing world of Artificial Intelligence through fun stories, cool facts, and interactive games designed just for kids like you!</p>
+            <button class="cta-button" onclick="scrollToSection('learn')">Start Learning! ✨</button>
+        </section>
+
+        <section id="news">
+            <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Latest AI News for Kids 📰</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">🤖</div>
+                    <div class="news-content">
+                        <div class="news-title">Super Smart Robots Learn Really Fast!</div>
+                        <div class="news-excerpt">Scientists have created robots that can learn new tasks almost instantly! These amazing robots use AI to figure out how to do things like humans do, but much faster.</div>
+                        <div class="news-date">August 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">🧠</div>
+                    <div class="news-content">
+                        <div class="news-title">AI Can Look at Your Brain and Keep It Healthy!</div>
+                        <div class="news-excerpt">Amazing new AI can look at brain scans and tell doctors if everything is working properly. It's like having a super-smart detective that helps keep your brain healthy!</div>
+                        <div class="news-date">July 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">🚀</div>
+                    <div class="news-content">
+                        <div class="news-title">Countries Working Together on AI Rules</div>
+                        <div class="news-excerpt">Countries around the world are making special rules to make sure AI is safe and helpful for everyone. It's like creating playground rules but for super-smart computers!</div>
+                        <div class="news-date">July 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">🔬</div>
+                    <div class="news-content">
+                        <div class="news-title">Scientists Make Tiny Computer Parts Super Thin!</div>
+                        <div class="news-excerpt">Researchers at Harvard made computer parts so thin they're almost invisible! These tiny parts will help make quantum computers that could solve really hard problems.</div>
+                        <div class="news-date">July 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">🎓</div>
+                    <div class="news-content">
+                        <div class="news-title">AI Changes How People Work (But Doesn't Take Jobs Away!)</div>
+                        <div class="news-excerpt">AI is helping people do their jobs better and learn new skills! Instead of replacing workers, AI is becoming their helpful assistant to make work more fun and easier.</div>
+                        <div class="news-date">July 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">🌟</div>
+                    <div class="news-content">
+                        <div class="news-title">Google's AI Can Spot Fake Videos!</div>
+                        <div class="news-excerpt">Google created special AI that can tell when videos are fake or real. This helps keep the internet safer by catching videos that try to trick people.</div>
+                        <div class="news-date">July 2025</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="learn">
+            <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Learn About AI 🧠</h2>
+            <div class="content-grid">
+                <div class="card">
+                    <span class="card-icon">🤔</span>
+                    <h3>What is AI?</h3>
+                    <p>AI stands for Artificial Intelligence. It's when we teach computers to think and learn like humans do! Just like how you learn to ride a bike, computers can learn to recognize pictures, understand speech, and solve problems.</p>
+                    <button class="cta-button" onclick="showAIExplanation()">Learn More!</button>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🏠</span>
+                    <h3>AI in Your Home</h3>
+                    <p>Did you know you probably use AI every day? When you ask Siri or Alexa a question, watch recommended videos on YouTube, or see suggestions on apps - that's all AI working behind the scenes!</p>
+                    <button class="cta-button" onclick="showHomeAI()">Discover More!</button>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🎮</span>
+                    <h3>AI in Games</h3>
+                    <p>Video games use AI to create smart characters that can play against you! The computer players in your favorite games use AI to make decisions and provide challenges.</p>
+                    <button class="cta-button" onclick="showGamesAI()">Play & Learn!</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="history">
+            <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🕰️ The Amazing History of AI</h2>
+            
+            <!-- History Navigation -->
+            <div style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px; margin-bottom: 40px;">
+                <h3 style="text-align: center; color: #333; margin-bottom: 30px; font-size: 2rem;">📚 Choose What You Want to Learn!</h3>
+                
+                <div class="history-nav">
+                    <button class="history-btn" onclick="toggleSection('timeline')">
+                        <span class="history-icon">📊</span>
+                        <div>
+                            <h4>AI Timeline</h4>
+                            <p>Journey from 1940s to today!</p>
+                        </div>
+                    </button>
+                    
+                    <button class="history-btn" onclick="toggleSection('heroes')">
+                        <span class="history-icon">👨‍🔬</span>
+                        <div>
+                            <h4>AI Heroes</h4>
+                            <p>Meet the brilliant minds behind AI!</p>
+                        </div>
+                    </button>
+                    
+                    <button class="history-btn" onclick="toggleSection('facts')">
+                        <span class="history-icon">🎉</span>
+                        <div>
+                            <h4>Fun Facts</h4>
+                            <p>Mind-blowing AI trivia!</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- AI Timeline Section (Hidden by default) -->
+            <div id="timeline-section" class="history-section" style="display: none;">
+                <div style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px; margin-bottom: 40px;">
+                    <div class="section-header">
+                        <h3 style="text-align: center; color: #333; margin-bottom: 20px; font-size: 2rem;">📊 AI Timeline: From Dreams to Reality!</h3>
+                        <button class="close-btn" onclick="toggleSection('timeline')">✕ Close</button>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">1940s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🧠</div>
+                                <h4>The Beginning - Smart Machines Dream</h4>
+                                <p>Scientists first imagined machines that could think like humans. World War 2 made people think about automatic calculations.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">1950</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🤖</div>
+                                <h4>Alan Turing's Big Question</h4>
+                                <p>A brilliant scientist named Alan Turing asked: "Can machines think?" He created the famous "Turing Test" to find out!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">1956</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🎉</div>
+                                <h4>AI Gets Its Name!</h4>
+                                <p>At Dartmouth College, scientists officially called it "Artificial Intelligence." John McCarthy, Marvin Minsky, and friends started the AI revolution!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">1960s-70s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🔬</div>
+                                <h4>Early AI Programs</h4>
+                                <p>Scientists created the first AI programs like ELIZA (a chatbot) and SHRDLU (understood simple commands). Computers started "talking"!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">1980s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">💼</div>
+                                <h4>Expert Systems</h4>
+                                <p>AI became useful in real jobs! "Expert systems" helped doctors diagnose illnesses and helped businesses make decisions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">1990s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🌐</div>
+                                <h4>Internet + AI = Magic!</h4>
+                                <p>The internet gave AI access to lots of information. Search engines like Google started using AI to find better results!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">1997</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">♟️</div>
+                                <h4>Deep Blue Beats Chess Champion!</h4>
+                                <p>IBM's computer "Deep Blue" beat the world chess champion Garry Kasparov! It was the first time AI won against a human in such a complex game.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2000s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🏠</div>
+                                <h4>AI Moves Into Our Homes</h4>
+                                <p>Recommendation systems (like Netflix suggestions), spam filters, and early voice recognition started appearing in everyday life.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2010s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🧠</div>
+                                <h4>Deep Learning Revolution!</h4>
+                                <p>Scientists figured out how to make AI learn like human brains! Siri, Alexa, self-driving cars, and image recognition exploded!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">2020s</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🚀</div>
+                                <h4>AI Everywhere!</h4>
+                                <p>ChatGPT, AI art, robot helpers, medical AI, and smart everything! AI became so good it can write stories, create pictures, and help with homework!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-year">Today</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🌟</div>
+                                <h4>Your AI Future!</h4>
+                                <p>You're living in the most exciting time in AI history! What AI invention will YOU create when you grow up?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heroes Section (Hidden by default) -->
+            <div id="heroes-section" class="history-section" style="display: none;">
+                <div style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px; margin-bottom: 40px;">
+                    <div class="section-header">
+                        <h3 style="text-align: center; color: #333; margin-bottom: 20px; font-size: 2rem;">👨‍🔬 Amazing People Who Made AI Possible!</h3>
+                        <button class="close-btn" onclick="toggleSection('heroes')">✕ Close</button>
+                    </div>
+                    
+                    <div class="heroes-grid">
+                        <div class="hero-card">
+                            <div class="hero-icon">🧮</div>
+                            <h4>Alan Turing</h4>
+                            <p><strong>The Father of AI</strong><br>Created the idea of machine intelligence and the famous "Turing Test" to see if machines can think like humans!</p>
+                        </div>
+                        
+                        <div class="hero-card">
+                            <div class="hero-icon">🎯</div>
+                            <h4>John McCarthy</h4>
+                            <p><strong>The Name Giver</strong><br>Invented the term "Artificial Intelligence" in 1956 and created the first AI programming language!</p>
+                        </div>
+                        
+                        <div class="hero-card">
+                            <div class="hero-icon">🔗</div>
+                            <h4>Marvin Minsky</h4>
+                            <p><strong>The Brain Builder</strong><br>Co-founded MIT's AI lab and taught us how to make machines learn and understand the world!</p>
+                        </div>
+                        
+                        <div class="hero-card">
+                            <div class="hero-icon">🌊</div>
+                            <h4>Geoffrey Hinton</h4>
+                            <p><strong>The Deep Learning Pioneer</strong><br>Showed AI how to learn like human brains using "neural networks" - the technology behind modern AI!</p>
+                        </div>
+                        
+                        <div class="hero-card">
+                            <div class="hero-icon">🎨</div>
+                            <h4>Fei-Fei Li</h4>
+                            <p><strong>The Vision Teacher</strong><br>Taught AI how to "see" and understand images, making photo recognition possible on your phone!</p>
+                        </div>
+                        
+                        <div class="hero-card">
+                            <div class="hero-icon">🚗</div>
+                            <h4>Demis Hassabis</h4>
+                            <p><strong>The Game Changer</strong><br>Created AlphaGo (beat humans at Go game) and founded DeepMind to solve intelligence!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facts Section (Hidden by default) -->
+            <div id="facts-section" class="history-section" style="display: none;">
+                <div style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px;">
+                    <div class="section-header">
+                        <h3 style="text-align: center; color: #333; margin-bottom: 20px; font-size: 2rem;">🎉 Mind-Blowing AI Facts!</h3>
+                        <button class="close-btn" onclick="toggleSection('facts')">✕ Close</button>
+                    </div>
+                    
+                    <div class="facts-grid">
+                        <div class="fact-card">
+                            <div class="fact-icon">🎭</div>
+                            <h4>The First Chatbot</h4>
+                            <p>ELIZA (1966) was the first chatbot! It pretended to be a therapist and people actually thought it understood them. It just repeated their words back as questions!</p>
+                        </div>
+                        
+                        <div class="fact-card">
+                            <div class="fact-icon">🎮</div>
+                            <h4>AI Loves Games</h4>
+                            <p>AI learned to be smart by playing games! It mastered Chess, then Go, then video games like StarCraft. Games teach AI strategy and quick thinking!</p>
+                        </div>
+                        
+                        <div class="fact-card">
+                            <div class="fact-icon">📚</div>
+                            <h4>AI Reads EVERYTHING</h4>
+                            <p>Modern AI has read almost the entire internet! That's billions of books, articles, and websites - way more than any human could read in a lifetime!</p>
+                        </div>
+                        
+                        <div class="fact-card">
+                            <div class="fact-icon">🧠</div>
+                            <h4>Inspired by Brains</h4>
+                            <p>Neural networks (how AI learns) are inspired by how your brain works! Scientists studied real neurons to teach computers how to think.</p>
+                        </div>
+                        
+                        <div class="fact-card">
+                            <div class="fact-icon">⚡</div>
+                            <h4>Super Fast Learning</h4>
+                            <p>AI can learn things incredibly fast! What takes humans years to master, AI can learn in hours or days with enough examples.</p>
+                        </div>
+                        
+                        <div class="fact-card">
+                            <div class="fact-icon">🌍</div>
+                            <h4>AI Speaks All Languages</h4>
+                            <p>Modern AI can translate between over 100 languages instantly! It's like having a universal translator from science fiction movies!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz-section" id="games">
+            <h2 style="color: #333; margin-bottom: 30px;">🧩 AI Quiz Time!</h2>
+            <div class="quiz-question" id="quizQuestion">
+                What does "AI" stand for?
+            </div>
+            <div class="quiz-options">
+                <button class="quiz-option" onclick="checkAnswer(this, false)">Apple Intelligence</button>
+                <button class="quiz-option" onclick="checkAnswer(this, true)">Artificial Intelligence</button>
+                <button class="quiz-option" onclick="checkAnswer(this, false)">Animal Intelligence</button>
+                <button class="quiz-option" onclick="checkAnswer(this, false)">Awesome Ideas</button>
+            </div>
+            <div id="quizResult"></div>
+            <button class="cta-button" onclick="nextQuestion()" id="nextBtn" style="display: none;">Next Question! 🎯</button>
+        </section>
+    </main>
+
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About AI Adventures</h4>
+                    <p>We make learning about AI fun and safe for kids! Our mission is to help young minds understand technology in an age-appropriate way.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>For Parents & Teachers</h4>
+                    <p>All content is reviewed by education experts and follows strict safety guidelines. <a href="#contact">Contact us</a> for classroom resources!</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p>Follow us for the latest AI news for kids! 📧 newsletter@aiadventures.com</p>
+                </div>
+            </div>
+            <p>&copy; 2025 AI Adventures. Making AI education fun and safe for kids! 🌟</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Quiz functionality
+        const quizQuestions = [
+            {
+                question: "What does 'AI' stand for?",
+                options: ["Apple Intelligence", "Artificial Intelligence", "Animal Intelligence", "Awesome Ideas"],
+                correct: 1
+            },
+            {
+                question: "Which of these uses AI?",
+                options: ["Voice assistants like Siri", "Calculators", "Bicycles", "Pencils"],
+                correct: 0
+            },
+            {
+                question: "What can AI help us do?",
+                options: ["Only play games", "Recognize pictures and understand speech", "Make sandwiches", "Tie shoelaces"],
+                correct: 1
+            },
+            {
+                question: "Is AI good or bad?",
+                options: ["Always bad", "Always good", "It depends on how we use it", "Only for adults"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function checkAnswer(button, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            const quizSection = document.querySelector('.quiz-section');
+            
+            options.forEach(opt => opt.disabled = true);
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                score++;
+                document.getElementById('quizResult').innerHTML = '🎉 Correct! Great job!';
+                
+                // Turn background green for correct answer
+                quizSection.style.background = 'linear-gradient(135deg, #4ecdc4, #44a08d)';
+                quizSection.style.color = 'white';
+                
+            } else {
+                button.classList.add('incorrect');
+                options[quizQuestions[currentQuestion].correct].classList.add('correct');
+                document.getElementById('quizResult').innerHTML = '🤔 Not quite! The correct answer is highlighted.';
+                
+                // Turn background red for wrong answer
+                quizSection.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a52)';
+                quizSection.style.color = 'white';
+            }
+            
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            const quizSection = document.querySelector('.quiz-section');
+            
+            // Reset background to white for next question
+            quizSection.style.background = 'rgba(255, 255, 255, 0.95)';
+            quizSection.style.color = '#333';
+            
+            currentQuestion++;
+            if (currentQuestion < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showFinalScore();
+            }
+        }
+
+        function loadQuestion() {
+            const question = quizQuestions[currentQuestion];
+            document.getElementById('quizQuestion').textContent = question.question;
+            
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((opt, index) => {
+                opt.textContent = question.options[index];
+                opt.disabled = false;
+                opt.className = 'quiz-option';
+                opt.onclick = () => checkAnswer(opt, index === question.correct);
+            });
+            
+            document.getElementById('quizResult').innerHTML = '';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function showFinalScore() {
+            const quizSection = document.querySelector('.quiz-section');
+            
+            // Special celebration background for final score
+            if (score === quizQuestions.length) {
+                quizSection.style.background = 'linear-gradient(135deg, #667eea, #764ba2, #4ecdc4)';
+            } else if (score >= quizQuestions.length/2) {
+                quizSection.style.background = 'linear-gradient(135deg, #4ecdc4, #44a08d)';
+            } else {
+                quizSection.style.background = 'linear-gradient(135deg, #ff9a56, #ffb347)';
+            }
+            quizSection.style.color = 'white';
+            
+            document.getElementById('quizQuestion').textContent = `Quiz Complete! 🎊`;
+            document.querySelector('.quiz-options').innerHTML = `
+                <div style="grid-column: 1/-1; padding: 20px; background: rgba(255, 255, 255, 0.2); color: white; border-radius: 15px; font-size: 1.2rem; backdrop-filter: blur(10px);">
+                    You scored ${score} out of ${quizQuestions.length}! ${score === quizQuestions.length ? '🌟 Perfect!' : score >= quizQuestions.length/2 ? '👍 Good job!' : '💪 Keep learning!'}
+                    <br><br>
+                    <button class="cta-button" onclick="restartQuiz()" style="margin-top: 15px;">Play Again! 🔄</button>
+                </div>
+            `;
+            document.getElementById('quizResult').innerHTML = '';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function restartQuiz() {
+            const quizSection = document.querySelector('.quiz-section');
+            currentQuestion = 0;
+            score = 0;
+            
+            // Reset to original white background
+            quizSection.style.background = 'rgba(255, 255, 255, 0.95)';
+            quizSection.style.color = '#333';
+            
+            // Reset quiz options HTML
+            document.querySelector('.quiz-options').innerHTML = `
+                <button class="quiz-option" onclick="checkAnswer(this, false)">Apple Intelligence</button>
+                <button class="quiz-option" onclick="checkAnswer(this, true)">Artificial Intelligence</button>
+                <button class="quiz-option" onclick="checkAnswer(this, false)">Animal Intelligence</button>
+                <button class="quiz-option" onclick="checkAnswer(this, false)">Awesome Ideas</button>
+            `;
+            
+            loadQuestion();
+        }
+
+        // Interactive learning functions
+        function showAIExplanation() {
+            const card = event.target.closest('.card');
+            const existingContent = card.querySelector('.expanded-content');
+            
+            if (existingContent) {
+                existingContent.remove();
+                event.target.textContent = 'Learn More!';
+                return;
+            }
+            
+            const expandedContent = document.createElement('div');
+            expandedContent.className = 'expanded-content';
+            expandedContent.innerHTML = `
+                <div style="margin-top: 20px; padding: 20px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; border-radius: 15px; animation: slideIn 0.3s ease;">
+                    <h4 style="color: white; margin-bottom: 15px;">🤖 How AI Works:</h4>
+                    <p style="margin-bottom: 10px;">• <strong>Learning:</strong> AI learns from lots of examples, just like you learn by practicing!</p>
+                    <p style="margin-bottom: 10px;">• <strong>Pattern Recognition:</strong> It finds patterns in data, like recognizing your face in photos</p>
+                    <p style="margin-bottom: 10px;">• <strong>Decision Making:</strong> AI uses what it learned to make smart choices</p>
+                    <p style="margin-bottom: 10px;">• <strong>Getting Better:</strong> The more it practices, the smarter it gets!</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                        <strong>Fun Fact:</strong> AI needs millions of examples to learn something you can learn in just a few tries! 🧠✨
+                    </div>
+                </div>
+            `;
+            card.appendChild(expandedContent);
+            event.target.textContent = 'Show Less';
+        }
+
+        function showHomeAI() {
+            const card = event.target.closest('.card');
+            const existingContent = card.querySelector('.expanded-content');
+            
+            if (existingContent) {
+                existingContent.remove();
+                event.target.textContent = 'Discover More!';
+                return;
+            }
+            
+            const expandedContent = document.createElement('div');
+            expandedContent.className = 'expanded-content';
+            expandedContent.innerHTML = `
+                <div style="margin-top: 20px; padding: 20px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; border-radius: 15px; animation: slideIn 0.3s ease;">
+                    <h4 style="color: white; margin-bottom: 15px;">🏠 AI Around Your House:</h4>
+                    <p style="margin-bottom: 10px;">📱 <strong>Your Phone:</strong> Face unlock, photo sorting, voice assistant</p>
+                    <p style="margin-bottom: 10px;">📺 <strong>Smart TV:</strong> Suggests shows you might like</p>
+                    <p style="margin-bottom: 10px;">🎵 <strong>Music Apps:</strong> Creates playlists based on your taste</p>
+                    <p style="margin-bottom: 10px;">🛒 <strong>Online Shopping:</strong> Shows products you might want</p>
+                    <p style="margin-bottom: 10px;">🚗 <strong>Navigation:</strong> Finds the best route to avoid traffic</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                        <strong>Try This:</strong> Count how many AI things you use in one day - you might be surprised! 📊
+                    </div>
+                </div>
+            `;
+            card.appendChild(expandedContent);
+            event.target.textContent = 'Show Less';
+        }
+
+        function showGamesAI() {
+            const card = event.target.closest('.card');
+            const existingContent = card.querySelector('.expanded-content');
+            
+            if (existingContent) {
+                existingContent.remove();
+                event.target.textContent = 'Play & Learn!';
+                return;
+            }
+            
+            const expandedContent = document.createElement('div');
+            expandedContent.className = 'expanded-content';
+            expandedContent.innerHTML = `
+                <div style="margin-top: 20px; padding: 20px; background: linear-gradient(45deg, #ff9a56, #ffb347); color: white; border-radius: 15px; animation: slideIn 0.3s ease;">
+                    <h4 style="color: white; margin-bottom: 15px;">🎮 AI in Gaming:</h4>
+                    <p style="margin-bottom: 10px;">🤖 <strong>Smart NPCs:</strong> Game characters that react to your actions</p>
+                    <p style="margin-bottom: 10px;">🏆 <strong>Difficulty Adjustment:</strong> Games get harder or easier based on your skill</p>
+                    <p style="margin-bottom: 10px;">🌍 <strong>Procedural Generation:</strong> AI creates new levels and worlds</p>
+                    <p style="margin-bottom: 10px;">🎯 <strong>Personalized Content:</strong> Games adapt to your playing style</p>
+                    <p style="margin-bottom: 10px;">🔍 <strong>Anti-Cheat Systems:</strong> AI detects unfair play</p>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                        <strong>Cool Example:</strong> In Minecraft, AI can build entire cities automatically! 🏗️✨
+                    </div>
+                </div>
+            `;
+            card.appendChild(expandedContent);
+            event.target.textContent = 'Show Less';
+        }
+
+        // Add click effects
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('cta-button') || e.target.classList.contains('quiz-option')) {
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = '';
+                }, 150);
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            loadQuestion();
+            
+            // Make toggleSection function globally available
+            window.toggleSection = function(sectionName) {
+                // Hide all sections first
+                const sections = ['timeline', 'heroes', 'facts'];
+                sections.forEach(section => {
+                    const element = document.getElementById(section + '-section');
+                    if (element) {
+                        element.style.display = 'none';
+                    }
+                });
+                
+                // Show the selected section
+                const targetSection = document.getElementById(sectionName + '-section');
+                if (targetSection) {
+                    if (targetSection.style.display === 'none' || targetSection.style.display === '') {
+                        targetSection.style.display = 'block';
+                        // Scroll to the section smoothly
+                        setTimeout(() => {
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    } else {
+                        targetSection.style.display = 'none';
+                    }
+                }
+            };
+        });
+
+        // Add some random floating emojis
+        function createFloatingEmoji() {
+            const emojis = ['🤖', '🚀', '⭐', '🌟', '✨', '🎨', '🧠', '🎮'];
+            const emoji = document.createElement('div');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.position = 'fixed';
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            emoji.style.top = window.innerHeight + 'px';
+            emoji.style.fontSize = '2rem';
+            emoji.style.pointerEvents = 'none';
+            emoji.style.zIndex = '1';
+            emoji.style.animation = 'floatUp 4s linear forwards';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => emoji.remove(), 4000);
+        }
+
+        // Add floating emoji animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                from {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create floating emojis periodically
+        setInterval(createFloatingEmoji, 3000);
+    </script>
+</body>
+</html>
